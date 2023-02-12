@@ -37,6 +37,10 @@ pub mod android;
 #[cfg(target_os = "android")]
 pub use self::android::{create, Configuration, Device, Queue};
 
+#[cfg(target_os = "windows")]
+pub mod windows;
+pub use self::windows::{create, Configuration, Device};
+
 #[cfg(test)]
 mod test {
     use crate::configuration::Configuration;
