@@ -19,47 +19,11 @@ use crate::error;
 use crate::configuration::Configuration;
 use crate::platform::create;
 
-// mod device;
-// pub use self::device::{AsyncDevice, AsyncQueue};
+mod device;
+pub use self::device::AsyncDevice;
 
 // mod codec;
 // pub use self::codec::{TunPacket, TunPacketCodec};
-
-#[cfg(any(
-    target_os = "linux",
-    target_os = "android",
-    target_os = "ios",
-    target_os = "macos"
-))]
-mod device;
-#[cfg(any(
-    target_os = "linux",
-    target_os = "android",
-    target_os = "ios",
-    target_os = "macos"
-))]
-pub use self::device::{AsyncDevice, AsyncQueue};
-
-#[cfg(any(
-    target_os = "linux",
-    target_os = "android",
-    target_os = "ios",
-    target_os = "macos"
-))]
-mod codec;
-
-#[cfg(any(
-    target_os = "linux",
-    target_os = "android",
-    target_os = "ios",
-    target_os = "macos"
-))]
-pub use self::codec::{TunPacket, TunPacketCodec};
-
-#[cfg(target_os = "windows")]
-pub mod windows;
-#[cfg(target_os = "windows")]
-pub use self::windows::AsyncDevice;
 
 /// Create a TUN device with the given name.
 pub fn create_as_async(configuration: &Configuration) -> Result<AsyncDevice, error::Error> {
