@@ -115,7 +115,7 @@ impl IntoRawFd for Fd {
 
 impl Drop for Fd {
     fn drop(&mut self) {
-        #[cfg(not(any(target_os = "ios")))]
+        #[cfg(not(any(target_os = "ios", target_os = "macos")))]
         unsafe {
             if self.0 >= 0 {
                 libc::close(self.0);
